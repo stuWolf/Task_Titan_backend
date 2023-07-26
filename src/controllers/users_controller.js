@@ -66,8 +66,6 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// Function to login a user (reuses existing login function)
-const loginUser = login;
 
 // Function to register a worker
 const createWorker = async (req, res) => {
@@ -134,7 +132,6 @@ module.exports = {
   login,
   getUsers,
   getAllUsers,
-  loginUser,
   createWorker,
   registerUser,
   getUser,

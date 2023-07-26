@@ -16,6 +16,11 @@ const ReviewSchema = new mongoose.Schema({
     ref: 'User', // assuming you have a User model
     required: true
   },
+  workerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // referencing the User model again
+    required: true
+  },
   startDate: {
     type: Date,
     required: true

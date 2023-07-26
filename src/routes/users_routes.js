@@ -4,8 +4,6 @@ const {
   login,
   getUsers,
   getAllUsers,
-  loginUser,
-  createWorker,
   registerUser,
   getUser,
   updateUser,
@@ -27,11 +25,6 @@ usersRouter.get("/users", getUsers);
 // Route to get all users
 usersRouter.get("/all", getAllUsers);
 
-// Route to login a user
-usersRouter.post("/loginUser", loginUser);
-
-// Route to register a worker
-usersRouter.post("/createWorker", createWorker);
 
 // Route to register a user
 usersRouter.post("/registerUser", registerUser);
