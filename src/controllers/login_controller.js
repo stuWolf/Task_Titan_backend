@@ -59,12 +59,21 @@ const login = async (request, response) => {
   }
 }
  
-
+//  register a customer
+const registerCustomer = async (req, res) => {
+  try {
+    req.body.userStatus = 'customer';
+    signup(req, res); // Reuse existing signup function
+  } catch (error) {
+    printError(error, res);
+  }
+};
 
 
 module.exports = {
   signup,
-  login
+  login,
+  registerCustomer
  
 };
 

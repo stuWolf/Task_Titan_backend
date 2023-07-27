@@ -81,7 +81,7 @@ const createJob = async (req, res) => {
       customerId: req.user.user_id, // Set userID from request user data
   
     });
-    console.log('user  ' + req.user.user_id)
+    // console.log('user  ' + req.user.user_id)
     await job.save();
     res.status(201).json({ message: "Job created", job });
   } catch (error) {

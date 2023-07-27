@@ -67,15 +67,7 @@ const registerWorker = async (req, res) => {
   }
 };
 
-//  register a customer
-const registerCustomer = async (req, res) => {
-  try {
-    req.body.userStatus = 'customer';
-    signup(req, res); // Reuse existing signup function
-  } catch (error) {
-    printError(error, res);
-  }
-};
+
 
 //  get a user by ID
 const getUser = async (req, res) => {
@@ -136,7 +128,6 @@ module.exports = {
   getUsers,
   getAllUsers,
   registerWorker,
-  registerCustomer,
   getUser,
   updateUser,
   deleteUser,
