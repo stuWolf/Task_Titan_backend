@@ -79,11 +79,13 @@ app.use("/users", usersRouter)
 // add a middleware that validates user authentication for all notes routes
 const validateRequest = require('./middlewares/auth_middleware');
 app.use(validateRequest)
+ 
+const jobsRouter = require('./routes/jobs_routes');
 
-const notesRouter = require('./routes/notes_routes');
+app.use("/jobs", jobsRouter)
+const reviewsRouter = require('./routes/reviews_routes');
 
-app.use("/notes", notesRouter)
-
+app.use("/reviews", reviewsRouter)
 
 
 app.get('*', (request, response) =>{
