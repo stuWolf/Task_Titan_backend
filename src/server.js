@@ -73,13 +73,17 @@ app.get("/", (request, response) => {
 	});
 });
 
-const usersRouter = require('./routes/users_routes')
-app.use("/users", usersRouter)
+const loginRouter = require('./routes/login_routes')
+app.use("/login", loginRouter)
 
 // add a middleware that validates user authentication for all notes routes
 const validateRequest = require('./middlewares/auth_middleware');
 app.use(validateRequest)
- 
+
+const usersRouter = require('./routes/users_routes')
+app.use("/users", usersRouter)
+
+
 const jobsRouter = require('./routes/jobs_routes');
 app.use("/jobs", jobsRouter)
 

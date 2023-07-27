@@ -1,7 +1,6 @@
 const express = require('express');
 const {
-  signup,
-  login,
+
   getUsers,
   getAllUsers,
   registerWorker,
@@ -15,11 +14,6 @@ const {
 const usersRouter = express.Router();
 
 
-//  signup a new user
-usersRouter.post("/signup", signup);
-
-//  login a user
-usersRouter.post("/login", login);
 
 //  get users of a certain status
 usersRouter.get("/users", getUsers);

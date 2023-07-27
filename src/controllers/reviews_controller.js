@@ -1,5 +1,4 @@
 const Review = require('../models/review');
-const User = require('../models/user');
 const { printError } = require('../services/print_error');
 
 
