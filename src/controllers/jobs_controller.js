@@ -26,6 +26,7 @@ const getLoggedInUser = async (request, res) => {
 //  get all jobs
 const getAllJobs = async (req, res) => {
   try {
+    // console.log('request.params  ' + [{req}]) 
     const jobs = await Job.find();
     res.json(jobs);
   } catch (error) {
@@ -53,8 +54,38 @@ const getJob = async (req, res) => {
 // console.log(request.user.user_id)
 
 const getMyJob = async (req, res) => {
+//  console.log('request.params  ' + request.params) 
   try {
+    console.log('user  ' + req.user.user_id)
     const jobs = await Job.find({ customerId: req.user.user_id });
+    // const jobs = await Job.find({ customerId: req.params.id });
+    res.json(jobs);
+  } catch (error) {
+    printError(error, res);
+  }
+};
+
+//  get all jobs not closed for a logged in user, by user ID
+const getMyJobsOpen = async (req, res) => {
+  try {
+    const jobs = await Job.find({ jobStatus: { $ne: 'Closed' }, customerId: req.user.user_id });
+    // console.log('customerId  ' + customerId)
+    if (jobs.length === 0) {
+      return res.status(404).json({ message: 'you have no open jobs' });
+    }
+    res.json(jobs);
+  } catch (error) {
+    printError(error, res);
+  }
+};
+
+//  get all jobs not closed for a logged in worker, by worker ID
+const getAllJobsOpenWorker = async (req, res) => {
+  try {
+    const jobs = await Job.find({ jobStatus: { $ne: 'Closed' }, workerId: req.user.user_id });
+    if (jobs.length === 0) {
+      return res.status(404).json({ message: 'No Jobs found for this worker' });
+    }
     res.json(jobs);
   } catch (error) {
     printError(error, res);
@@ -80,12 +111,23 @@ const createJob = async (req, res) => {
 //  update a job
 const updateJob = async (req, res) => {
   try {
-    const job = await Job.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (job) {
-      res.json({ message: "Job updated", job });
-    } else {
-      res.status(404).json({ message: "Job not found" });
+    const job = await Job.findById(req.params.id);
+    
+    // Add a condition to check if the job exists and if the user is allowed to update
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
     }
+    if (job.customerId.toString() !== req.user.user_id) {
+      return res.status(403).json({ message: "You don't have permission to update this job" });
+    }
+    
+    // Delete customerId from req.body to prevent it from being updated
+    delete req.body.customerId;
+
+    // If the check is successful, proceed to update the job
+    const updatedJob = await Job.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    
+    res.json({ message: "Job updated", updatedJob });
   } catch (error) {
     printError(error, res);
   }
@@ -140,31 +182,32 @@ const getStatusJobs = async (req, res) => {
 };
 
 
-//  get all jobs not closed for a logged in user, by user ID
-const getMyJobsOpen = async (req, res) => {
-  try {
-    const jobs = await Job.find({ jobStatus: { $ne: 'Closed' }, customerId: req.user.user_id });
-    if (jobs.length === 0) {
-      return res.status(404).json({ message: 'you have no open jobs' });
-    }
-    res.json(jobs);
-  } catch (error) {
-    printError(error, res);
-  }
-};
 
-//  get all jobs not closed for a logged in worker, by worker ID
-const getAllJobsOpenWorker = async (req, res) => {
-  try {
-    const jobs = await Job.find({ jobStatus: { $ne: 'Closed' }, workerId: req.user.user_id });
-    if (jobs.length === 0) {
-      return res.status(404).json({ message: 'No Jobs found for this worker' });
-    }
-    res.json(jobs);
-  } catch (error) {
-    printError(error, res);
-  }
-};
+
+// Function to get all open jobs for a user, by user ID
+// const getAllJobsOpen = async (req, res) => {
+//   try {
+//     const jobs = await Job.find({ jobStatus: 'open', customerId: req.params.userId });
+//     res.json(jobs);
+//   } catch (error) {
+//     printError(error, res);
+//   }
+// Function to get all open jobs for a user, by user ID
+// const getAllJobsOpen = async (req, res) => {
+//   try {
+//     const jobs = await Job.find({ jobStatus: 'open', customerId: req.user.user_id });
+//     if (!jobs) {
+//       return res.status(404).json({ message: 'No jobs found for this user' });
+//     }
+//     res.json(jobs);
+//   } catch (error) {
+//     printError(error, res);
+//   }
+// };  
+
+
+
+
 
 
 module.exports = {
