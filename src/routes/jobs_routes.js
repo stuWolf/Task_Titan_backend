@@ -9,15 +9,11 @@ const {
   updateJob,
   deleteJob,
   deleteAllJobs,
-  getLoggedInUser,
   getMyJobsOpen,
   getAllJobsOpenWorker
 } = require('../controllers/jobs_controller');
 
 const jobsRouter = express.Router();
-
-//  get loggged in user OK
-jobsRouter.get("/loggedIn", getLoggedInUser);
 
 //  get all jobs with status "open"  OK
 jobsRouter.get("/status/open", getOpenJobs);

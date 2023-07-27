@@ -8,12 +8,14 @@ const {
   getUser,
   updateUser,
   deleteUser,
-  deleteAllUsers
+  deleteAllUsers,
+  getLoggedInUser
 } = require('../controllers/users_controller');
 
 const usersRouter = express.Router();
 
-
+//  get loggged in user OK
+usersRouter.get("/loggedIn", getLoggedInUser);
 
 //  get users of a certain status
 usersRouter.get("/users", getUsers);

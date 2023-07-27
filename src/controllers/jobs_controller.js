@@ -1,25 +1,6 @@
 const Job = require('../models/job');
-const User = require('../models/user');
 const { printError } = require('../services/print_error');
 
-
-// Function to get the currently logged-in user
-const getLoggedInUser = async (request, res) => {
-  try {
-    // let user = await User.findById(request.user.user_id)
-    let user = await User.findById(request.user.user_id);
-    // console.log()
-    // console.log(request.user.user_id);
-    if (!user) {
-      
-      return res.status(404).json({ message: 'User not found' });
-      
-    }
-    res.json(user);
-  } catch (error) {
-    printError(error, res);
-  }
-};
 
 
 
@@ -211,7 +192,6 @@ const getStatusJobs = async (req, res) => {
 
 
 module.exports = {
-  getLoggedInUser,
   getAllJobs,
   getStatusJobs,
   getOpenJobs,
