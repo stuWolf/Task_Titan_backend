@@ -50,7 +50,7 @@ const login = async (request, response) => {
             token: token
         })
     } else {
-        response.json({
+        response.status(404).json({
             error: "authentication failed"
         })
     }
@@ -67,7 +67,11 @@ const getUsers = async (req, res) => {
   try {
     const users = await User.find({ userStatus: req.body.userStatus });
     
-    res.json(users);
+    if (users.length === 0) {
+      res.status(404).jason({ message: "No users found" });
+    } else {
+      res.json(users);
+    }
  
   } catch (error) {
     console.log(userStatus);
@@ -77,10 +81,15 @@ const getUsers = async (req, res) => {
 };
 
 // Function to get all users
+// Function to get all users
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.json(users);
+    if (users.length === 0) {
+      res.status(404).json({ message: "No users found" });
+    } else {
+      res.json(users);
+    }
   } catch (error) {
     printError(error, res);
   }
@@ -111,7 +120,11 @@ const registerCustomer = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
   } catch (error) {
     printError(error, res);
   }
@@ -121,17 +134,27 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(user);
+    // res.json(user);
+    if (user) {
+    res.json({message: 'User updated',user });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
   } catch (error) {
     printError(error, res);
   }
 };
 
 // Function to delete a user
+
 const deleteUser = async (req, res) => {
   try {
-    await User.findByIdAndRemove(req.params.id);
-    res.json({ message: 'User deleted' });
+    const user = await User.findByIdAndRemove(req.params.id);
+    if (user) {
+      res.json({ message: 'User deleted' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
   } catch (error) {
     printError(error, res);
   }
