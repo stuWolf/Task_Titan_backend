@@ -1,4 +1,5 @@
 const Job = require('../models/job');
+const { printError } = require('../services/print_error');
 
 // Function to get all jobs
 const getAllJobs = async (req, res) => {
@@ -6,7 +7,7 @@ const getAllJobs = async (req, res) => {
     const jobs = await Job.find();
     res.json(jobs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -16,7 +17,7 @@ const getStatusJobs = async (req, res) => {
     const jobs = await Job.find({ jobStatus: 'open' });
     res.json(jobs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -24,9 +25,13 @@ const getStatusJobs = async (req, res) => {
 const getJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
-    res.json(job);
+    if (job) {
+      res.json(job);
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -36,7 +41,7 @@ const getMyJob = async (req, res) => {
     const jobs = await Job.find({ customerId: req.user.id });
     res.json(jobs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -45,9 +50,9 @@ const createJob = async (req, res) => {
   try {
     const job = new Job(req.body);
     await job.save();
-    res.status(201).json(job);
+    res.status(201).json({ message: "Job created", job });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -55,19 +60,27 @@ const createJob = async (req, res) => {
 const updateJob = async (req, res) => {
   try {
     const job = await Job.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(job);
+    if (job) {
+      res.json({ message: "Job updated", job });
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    printError(error, res);
   }
 };
 
 // Function to delete a job
 const deleteJob = async (req, res) => {
   try {
-    await Job.findByIdAndRemove(req.params.id);
-    res.json({ message: 'Job deleted' });
+    const job = await Job.findByIdAndRemove(req.params.id);
+    if (job) {
+      res.json({ message: 'Job deleted' });
+    } else {
+      res.status(404).json({ message: 'Job not found' });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -77,7 +90,7 @@ const deleteAllJobs = async (req, res) => {
     await Job.deleteMany();
     res.json({ message: 'All jobs deleted' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -87,7 +100,7 @@ const getAllJobsOpen = async (req, res) => {
     const jobs = await Job.find({ jobStatus: 'open', customerId: req.params.userId });
     res.json(jobs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -97,7 +110,7 @@ const getAllJobsOpenWorker = async (req, res) => {
     const jobs = await Job.find({ jobStatus: 'open', workerId: req.params.workerId });
     res.json(jobs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 

@@ -1,12 +1,18 @@
 const Review = require('../models/review');
+const { printError } = require('../services/print_error');
+
 
 // Function to get all reviews
 const getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.find();
-    res.json(reviews);
+    if (reviews.length === 0) {
+      res.status(404).json({ message: "No reviews found" });
+    } else {
+      res.json(reviews);
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -14,9 +20,13 @@ const getAllReviews = async (req, res) => {
 const getJobReview = async (req, res) => {
   try {
     const reviews = await Review.find({ jobId: req.params.jobId });
-    res.json(reviews);
+    if (reviews.length === 0) {
+      res.status(404).json({ message: "No reviews found for this job" });
+    } else {
+      res.json(reviews);
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -24,9 +34,13 @@ const getJobReview = async (req, res) => {
 const getWorkerReview = async (req, res) => {
   try {
     const reviews = await Review.find({ workerId: req.params.workerId });
-    res.json(reviews);
+    if (reviews.length === 0) {
+      res.status(404).json({ message: "No reviews found for this worker" });
+    } else {
+      res.json(reviews);
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -34,9 +48,13 @@ const getWorkerReview = async (req, res) => {
 const getCustomerReview = async (req, res) => {
   try {
     const reviews = await Review.find({ customerId: req.params.customerId });
-    res.json(reviews);
+    if (reviews.length === 0) {
+      res.status(404).json({ message: "No reviews found for this customer" });
+    } else {
+      res.json(reviews);
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -47,17 +65,21 @@ const createReview = async (req, res) => {
     await review.save();
     res.status(201).json(review);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    printError(error, res);
   }
 };
 
 // Function to delete a review
 const deleteReview = async (req, res) => {
   try {
-    await Review.findByIdAndRemove(req.params.id);
-    res.json({ message: 'Review deleted' });
+    const review = await Review.findByIdAndRemove(req.params.id);
+    if (review) {
+      res.json({ message: 'Review deleted' });
+    } else {
+      res.status(404).json({ message: 'Review not found' });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -67,7 +89,7 @@ const deleteAllReviews = async (req, res) => {
     await Review.deleteMany();
     res.json({ message: 'All reviews deleted' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 
@@ -75,9 +97,13 @@ const deleteAllReviews = async (req, res) => {
 const getReview = async (req, res) => {
   try {
     const review = await Review.findById(req.params.id);
-    res.json(review);
+    if (review) {
+      res.json(review);
+    } else {
+      res.status(404).json({ message: 'Review not found' });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    printError(error, res);
   }
 };
 

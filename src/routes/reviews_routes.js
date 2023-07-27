@@ -12,6 +12,12 @@ const {
 
 const reviewsRouter = express.Router();
 
+
+// Route to create a review
+reviewsRouter.post("/", createReview);
+// Route to get a review by ID
+reviewsRouter.get("/:id", getReview);
+
 // Route to get all reviews
 reviewsRouter.get("/", getAllReviews);
 
@@ -23,9 +29,6 @@ reviewsRouter.get("/worker/:workerId", getWorkerReview);
 
 // Route to get all reviews for a specific customer ID
 reviewsRouter.get("/customer/:customerId", getCustomerReview);
-
-// Route to create a review
-reviewsRouter.post("/", createReview);
 
 // Route to delete a review
 reviewsRouter.delete("/:id", deleteReview);
