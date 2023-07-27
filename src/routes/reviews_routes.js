@@ -33,10 +33,12 @@ reviewsRouter.get("/customer/:customerId", getCustomerReview);
 //   delete a review
 reviewsRouter.delete("/:id", deleteReview);
 
+//   get a review by ID
+reviewsRouter.get("/:id", getReview);
+
 //   delete all reviews
 reviewsRouter.delete("/", deleteAllReviews);
 
-//   get a review by ID
-reviewsRouter.get("/:id", getReview);
+
 
 module.exports = reviewsRouter;
