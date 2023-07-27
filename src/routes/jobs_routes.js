@@ -2,46 +2,54 @@ const express = require('express');
 const {
   getAllJobs,
   getStatusJobs,
+  getOpenJobs,
   getJob,
   getMyJob,
   createJob,
   updateJob,
   deleteJob,
   deleteAllJobs,
-  getAllJobsOpen,
+  getLoggedInUser,
+  getMyJobsOpen,
   getAllJobsOpenWorker
 } = require('../controllers/jobs_controller');
 
 const jobsRouter = express.Router();
 
-// Route to get all jobs
-jobsRouter.get("/", getAllJobs);
+//  get loggged in user
+jobsRouter.get("/loggedIn", getLoggedInUser);
 
-// Route to get all jobs with status "open"
-jobsRouter.get("/status/open", getStatusJobs);
-
-// Route to get a job by ID
-jobsRouter.get("/:id", getJob);
-
-// Route to get all jobs for the logged-in customer
-jobsRouter.get("/myjobs", getMyJob);
-
-// Route to create a job
+//  create a job
 jobsRouter.post("/", createJob);
 
-// Route to update a job
+//  get all jobs
+jobsRouter.get("/", getAllJobs);
+
+//  get all jobs with status "open"
+jobsRouter.get("/status/open", getOpenJobs);
+
+//  get all jobs with given status 
+jobsRouter.get("/status/:status", getStatusJobs);
+
+//  get a job by ID
+jobsRouter.get("/:id", getJob);
+
+//  get all jobs for the logged-in customer
+jobsRouter.get("/myjobs", getMyJob);
+
+//  update a job
 jobsRouter.put("/:id", updateJob);
 
-// Route to delete a job
+//  delete a job
 jobsRouter.delete("/:id", deleteJob);
 
-// Route to delete all jobs
+//  delete all jobs
 jobsRouter.delete("/", deleteAllJobs);
 
-// Route to get all open jobs for a user, by user ID
-jobsRouter.get("/open/:userId", getAllJobsOpen);
+//  get all open jobs for logged in user, by user ID
+jobsRouter.get("/open/", getMyJobsOpen);
 
-// Route to get all open jobs for a worker, by worker ID
-jobsRouter.get("/open/worker/:workerId", getAllJobsOpenWorker);
+//  get all open jobs for a logged in worker, by worker ID
+jobsRouter.get("/open/worker/", getAllJobsOpenWorker);
 
 module.exports = jobsRouter;

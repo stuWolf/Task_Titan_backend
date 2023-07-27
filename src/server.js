@@ -81,10 +81,9 @@ const validateRequest = require('./middlewares/auth_middleware');
 app.use(validateRequest)
  
 const jobsRouter = require('./routes/jobs_routes');
-
 app.use("/jobs", jobsRouter)
-const reviewsRouter = require('./routes/reviews_routes');
 
+const reviewsRouter = require('./routes/reviews_routes');
 app.use("/reviews", reviewsRouter)
 
 

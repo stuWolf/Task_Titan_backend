@@ -1,7 +1,7 @@
 const printError = (error, response) => {
     if (error.name === 'MongoServerError' && error.code === 11000) {
       // Unique constraint error, duplicate key
-      return response.status(409).json({ message: 'Email already exists!' });
+      return response.status(409).json({ message: `Email already exists!${error}` });
     }
     
     if (error.name === 'ValidationError') {

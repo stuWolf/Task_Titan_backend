@@ -13,30 +13,30 @@ const {
 const reviewsRouter = express.Router();
 
 
-// Route to create a review
+//   create a review
 reviewsRouter.post("/", createReview);
-// Route to get a review by ID
+//   get a review by ID
 reviewsRouter.get("/:id", getReview);
 
-// Route to get all reviews
+//   get all reviews
 reviewsRouter.get("/", getAllReviews);
 
-// Route to get a review for a specific job ID
+//   get a review for a specific job ID
 reviewsRouter.get("/job/:jobId", getJobReview);
 
-// Route to get all reviews for a specific worker ID
+//   get all reviews for a specific worker ID
 reviewsRouter.get("/worker/:workerId", getWorkerReview);
 
-// Route to get all reviews for a specific customer ID
+//   get all reviews for a specific customer ID
 reviewsRouter.get("/customer/:customerId", getCustomerReview);
 
-// Route to delete a review
+//   delete a review
 reviewsRouter.delete("/:id", deleteReview);
 
-// Route to delete all reviews
+//   delete all reviews
 reviewsRouter.delete("/", deleteAllReviews);
 
-// Route to get a review by ID
+//   get a review by ID
 reviewsRouter.get("/:id", getReview);
 
 module.exports = reviewsRouter;

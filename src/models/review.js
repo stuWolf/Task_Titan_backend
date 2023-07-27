@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const ReviewSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true
-  },
+
   jobId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Job', // assuming you have a Job model

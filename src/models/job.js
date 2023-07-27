@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-
+// const User = require('../models/user');
 const JobSchema = new mongoose.Schema({
   jobStatus: {
     type: String,
-    enum: ['Draft', 'Quoting', 'Customer Approval', 'Worker Assignment', 'Job Implementation', 'Customer Review'],
+    enum: ['Draft', 'Quoting', 'Customer Approval', 'Worker Assignment', 'Job Implementation', 'Customer Review', 'Closed'],
     required: true
   },
   customerId: {
@@ -34,7 +34,8 @@ const JobSchema = new mongoose.Schema({
     type: Number
   },
   quoteAttachment: {
-    type: String
+    type: String,
+    default: 'link to quote.PDF'
   },
   workerId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -56,18 +57,15 @@ const JobSchema = new mongoose.Schema({
   mainsPhases: {
     type: Number
   },
-  workStart: {
-    type: Date
-  },
+  
   reviewId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review', // assuming you have a Review model
   },
-  workEnd: {
-    type: Date
-  },
+  
   invoiceLink: {
-    type: String
+    type: String,
+    default: 'link to invoice.PDF'
   }
 });
 
