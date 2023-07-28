@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
       
     },
     licenseNo: {
-      type: Number
+      type: String
       
     },
     employedSince: {
