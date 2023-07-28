@@ -46,7 +46,7 @@ const login = async (request, response) => {
         const token = createToken(user._id, user.email)
         response.json({
           user_ID: user._id,
-          userStatus: user.userStatus,
+       userStatus: user.userStatus,
             email: user.email,
             token: token
         })

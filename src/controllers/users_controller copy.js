@@ -1,8 +1,7 @@
 const User = require('../models/user')
 
 const { printError } = require('../services/print_error');
-// const {createToken } = require('../services/auth_service')
-const bcrypt = require("bcrypt")
+const {createToken } = require('../services/auth_service')
  
 // Function to get the currently logged-in user
 const getLoggedInUser = async (request, res) => {
@@ -89,53 +88,29 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     // find user by id
-    const user = await User.findById(req.params.id);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(user);
     // if email was updated
-    if (req.body.email && req.body.email !== user.email) {
-      // check if new email already exists
-      const emailExists = await User.findOne({ email: req.body.email });
-
-      if (emailExists) {
-        throw new Error("Email already exists");
-      }
-
-      // update email
-      user.email = req.body.email;
-    }
+    //    if email exists throw error, "email already exists"
+    //     else :  update email 
+    // else: do not update email
 
     // if password was updated
-    if (req.body.password) {
-      // hash new password
-      user.password = bcrypt.hashSync(
-        req.body.password,
-        bcrypt.genSaltSync(10)
-      );
-    }
-
-    // update other values
-    if (req.body.firstName) user.firstName = req.body.firstName;
-    if (req.body.lastName) user.lastName = req.body.lastName;
-    if (req.body.address) user.address = req.body.address;
-    if (req.body.contactNumber) user.contactNumber = req.body.contactNumber;
-    if (req.body.dob) user.dob = req.body.dob;
-    if (req.body.license) user.license = req.body.license;
-    if (req.body.licenseNo) user.licenseNo = req.body.licenseNo;
-    if (req.body.employedSince) user.employedSince = req.body.employedSince;
-
-    // save updated user
-    const updatedUser = await user.save();
-
-    res.json({ message: 'User updated', updatedUser });
+      // password: bcrypt.hashSync(
+      //request.body.password,
+      //bcrypt.genSaltSync(10)),
+      // else:  do not update password
+      // await updatedUser.save()
+    res.json(user);
+    if (user) {
+    res.json({message: 'User updated',user });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
   } catch (error) {
     printError(error, res);
   }
 };
-
 
 //  delete a user
 

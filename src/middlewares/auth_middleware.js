@@ -2,10 +2,12 @@ const { verifyToken } = require("../services/auth_service");
 
 
 const validateRequest = (request, response, next) => {
-    console.log(request.headers)
+    console.log("request.headers" + request.headers)
     try{
+        
         if(request.headers.authorization){
             const token = request.headers.authorization.split(" ")[1];
+
             if (!token){
                 throw new Error ("A token is required for authentication")
             }
@@ -14,7 +16,8 @@ const validateRequest = (request, response, next) => {
             request.user = decoded
             return next();
         } else{
-            throw new Error ("Not authenticated for this action")
+            
+            throw new Error ('Not authenticated for this action ')
         }
         
     } catch (error) {
