@@ -2,7 +2,8 @@ const User = require('../models/user')
 const {signup} = require('./login_controller')
 const { printError } = require('../services/print_error');
 // const {createToken } = require('../services/auth_service')
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { getConsoleOutput } = require('@jest/console');
  
 // Function to get the currently logged-in user
 const getLoggedInUser = async (request, res) => {
@@ -95,43 +96,51 @@ const updateUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // if email was updated
+    // if email was updated and is not the email of current user
     if (req.body.email && req.body.email !== user.email) {
       // check if new email already exists
       const emailExists = await User.findOne({ email: req.body.email });
 
       if (emailExists) {
-        throw new Error("Email already exists");
+
+        console.log('error thrown E11000: Email already exists"')
+        throw new Error("E11000: Email already exists");
+
+        
       }
 
       // update email
       user.email = req.body.email;
-    }
+    } //endif
 
     // if password was updated
-    if (req.body.password) {
+    // if (req.body.password) {
       // hash new password
       user.password = bcrypt.hashSync(
         req.body.password,
         bcrypt.genSaltSync(10)
       );
-    }
+    // }
 
     // update other values
-    if (req.body.firstName) user.firstName = req.body.firstName;
-    if (req.body.lastName) user.lastName = req.body.lastName;
-    if (req.body.address) user.address = req.body.address;
-    if (req.body.contactNumber) user.contactNumber = req.body.contactNumber;
-    if (req.body.dob) user.dob = req.body.dob;
-    if (req.body.license) user.license = req.body.license;
-    if (req.body.licenseNo) user.licenseNo = req.body.licenseNo;
-    if (req.body.employedSince) user.employedSince = req.body.employedSince;
+ user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+     user.address = req.body.address;
+   user.contactNumber = req.body.contactNumber;
+     user.dob = req.body.dob;
+     user.license = req.body.license;
+     user.licenseNo = req.body.licenseNo;
+     user.employedSince = req.body.employedSince;
 
+
+    console.log('user firstname  ' + user.firstName + ' us email: '+ user.email + '  user.address:   ' + user.address )
     // save updated user
     const updatedUser = await user.save();
 
-    res.json({ message: 'User updated', updatedUser });
+    res.status(200).json({user_id: updatedUser._id,
+    email: updatedUser.email });
   } catch (error) {
+    console.log('update error'  + error)
     printError(error, res);
   }
 };

@@ -26,7 +26,7 @@ const signup = async (request, response) => {
 
     await newUser.save()
     const token = createToken(newUser._id, newUser.email)
-  response.json({
+  response.status(200).json({
     user_id: newUser._id,
     email: newUser.email,
     token: token
@@ -45,7 +45,7 @@ const login = async (request, response) => {
     try { 
     if (user && bcrypt.compareSync(request.body.password, user.password)){
         const token = createToken(user._id, user.email)
-        response.json({
+        response.status(200).json({
           user_ID: user._id,
        userStatus: user.userStatus,
             email: user.email,
