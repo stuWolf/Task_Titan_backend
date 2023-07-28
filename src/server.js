@@ -76,6 +76,7 @@ app.get("/", (request, response) => {
 const loginRouter = require('./routes/login_routes')
 app.use("/login", loginRouter)
 
+// when login Router is performed that doesn't need a token no validate request
 // add a middleware that validates user authentication for all notes routes
 const validateRequest = require('./middlewares/auth_middleware');
 app.use(validateRequest)

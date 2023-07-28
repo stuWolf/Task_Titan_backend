@@ -32,6 +32,7 @@ const signup = async (request, response) => {
     token: token
   })
   } catch (error) {
+    console.log('login error'  + error)
     printError(error, response);
   }
 

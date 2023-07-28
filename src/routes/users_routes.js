@@ -27,7 +27,7 @@ usersRouter.get("/all", getAllUsers);
 
 
 //  register a Worker  input: body: JSON.stringify(data)
-// used in: Manage Workers
+// used in: Manage Workers manager is logged in
 usersRouter.post("/registerWorker", registerWorker);
 
 

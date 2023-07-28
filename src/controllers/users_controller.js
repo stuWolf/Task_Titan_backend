@@ -1,5 +1,5 @@
 const User = require('../models/user')
-
+const {signup} = require('./login_controller')
 const { printError } = require('../services/print_error');
 // const {createToken } = require('../services/auth_service')
 const bcrypt = require("bcrypt")
