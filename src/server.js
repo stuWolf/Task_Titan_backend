@@ -7,9 +7,15 @@ const app = express();
 
 const PORT = process.env.PORT || 3001
 const HOST = process.env.HOST || '127.0.0.1'
-const User = require('./models/user')
+// const User = require('./models/user')
 const Job = require('./models/job')
-const Review = require('./models/review')
+// const Review = require('./models/review')
+// const reviewSeed= require('./services/reviewSeed')
+// const userSeed= require('./services/userSeed')
+const jobSeed= require('./services/jobSeed')
+
+
+
 
 const helmet = require('helmet')
 app.use(helmet());
@@ -73,21 +79,50 @@ app.get("/databaseHealth", (request, response) => {
 
 app.post("/seedDatabase", (request, response)=> {
 
+
+	
 	Job.deleteMany({})
 	.then(() => Job.insertMany(jobSeed))
 	.then(data => {
 	  console.log('Data imported! ', data);
+	response.json({
+		message:"The Jobs database was  seeded"
+	});
 	  process.exit(0);
 	})
 	.catch(err => {
-	  console.error('Error importing data: ', err);
+	  console.error('Error  importing  Jobs data:  ', err);
 	  process.exit(1);
 	});
 
+	// User.deleteMany({})
+	// .then(() => User.insertMany(userSeed))
+	// .then(data => {
+	// //   console.log('Data imported! ', data);
+	// response.json({
+	// 	message:"The User database was seeded"
+	// });
+	//   process.exit(0);
+	// })
+	// .catch(err => {
+	//   console.error('Error importing User data: ', err);
+	//   process.exit(1);
+	// });
 
-	response.json({
-		message:"The database was seeded"
-	});
+	// Review.deleteMany({})
+	// .then(() =>  Review.insertMany(reviewSeed))
+	// .then(data => {
+	// //   console.log('Data imported! ', data);
+	// response.json({
+	// 	message:"The   Review database was seeded"
+	// });
+	//   process.exit (0);
+	// })
+	// .catch(err => {
+	//   console.error('Error importing Review data: ', err);
+	//   process.exit(1);
+	// });
+	
 })
 
 app.get("/", (request, response) => {

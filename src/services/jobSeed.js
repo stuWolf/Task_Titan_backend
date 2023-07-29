@@ -5,8 +5,9 @@ const jobSeed = [
         customerId: "64c5541869a5213214551fd1",
         addressOfInstallation: "20 Flinders St, Adelaide, SA 5000, Australia",
         scopeOfWork: "Electrical installation and maintenance",
-        preferredJobCompletionDate: new Date("2023-09-15"),
-        dateQuoted: new Date("2023-08-25"),
+        preferredJobCompletionDate: "2023-12-01T00:00:00.00Z",
+        prefDate: "2023-07-15T00:00:00.000Z",
+        dateQuoted: "2023-08-25",
         amountQuoted: 1300.5,
         quoteAttachment: "http://example.com/quote1.pdf",
         workerId: "64c5540169a5213214551fcd",
@@ -15,20 +16,21 @@ const jobSeed = [
         electricalRetailer: "Best Electricity Retailer",
         energyDistributor: "Top Energy Distributor",
         mainsPhases: 3,
-        workStart: new Date("2023-09-01"),
+        workStart: "2023-12-01T00:00:00.000Z",
         reviewId: "64c554a069a5213214551fd8",
-        workEnd: new Date("2023-09-10"),
+        workEnd: "2023-12-01T00:00:00.000Z",
         invoiceLink: "http://example.com/invoice1.pdf",
-        dateCreated: new Date("2023-08-25")
+        dateCreated: "2023-08-25"
     },
+
     {
         _id: "64c554b269a5213214551fd9",
         jobStatus: "Draft",
         customerId: "64c5542569a5213214551fd3",
         addressOfInstallation: "30 North Tce, Adelaide, SA 5000, Australia",
         scopeOfWork: "Electrical installation and repair",
-        preferredJobCompletionDate: new Date("2023-09-20"),
-        dateQuoted: new Date("2023-08-28"),
+        preferredJobCompletionDate: "2023-09-20",
+        dateQuoted: "2023-08-28",
         amountQuoted: 1400.5,
         quoteAttachment: "http://example.com/quote2.pdf",
         workerId: "64c5540a69a5213214551fcf",
@@ -37,23 +39,23 @@ const jobSeed = [
         electricalRetailer: "Next Electricity Retailer",
         energyDistributor: "Super Energy Distributor",
         mainsPhases: 3,
-        workStart: new Date("2023-09-05"),
+        workStart: "2023-09-05",
         reviewId: "64c554b269a5213214551fda",
-        workEnd: new Date("2023-09-15"),
+        workEnd: "2023-09-15",
         invoiceLink: "http://example.com/invoice2.pdf",
-        dateCreated: new Date("2023-08-30")
+        dateCreated: "2023-08-30"
     },
 
         // ...existing jobs here...
     
         {
             _id: "64c554c869a5213214551fdb",
-            jobStatus: "In Progress",
+            jobStatus: "Customer Approval",
             customerId: "64c5541869a5213214551fd1",
             addressOfInstallation: "20 Flinders St, Adelaide, SA 5000, Australia",
             scopeOfWork: "Plumbing installation and maintenance",
-            preferredJobCompletionDate: new Date("2023-10-01"),
-            dateQuoted: new Date("2023-09-01"),
+            preferredJobCompletionDate: "2023-10-01",
+            dateQuoted: "2023-09-01",
             amountQuoted: 1700.5,
             quoteAttachment: "http://example.com/quote3.pdf",
             workerId: "64c553df69a5213214551fc9",
@@ -62,20 +64,20 @@ const jobSeed = [
             electricalRetailer: "Excellent Electricity Retailer",
             energyDistributor: "Mega Energy Distributor",
             mainsPhases: 3,
-            workStart: new Date("2023-09-10"),
+            workStart: "2023-09-10",
             reviewId: "64c554c869a5213214551fdc",
-            workEnd: new Date("2023-09-20"),
+            workEnd: "2023-09-20",
             invoiceLink: "http://example.com/invoice3.pdf",
-            dateCreated: new Date("2023-09-05")
+            dateCreated: "2023-09-05"
         },
         {
             _id: "64c554d669a5213214551fdd",
-            jobStatus: "Complete",
+            jobStatus: "Closed",
             customerId: "64c5542569a5213214551fd3",
             addressOfInstallation: "30 North Tce, Adelaide, SA 5000, Australia",
             scopeOfWork: "Carpentry installation and repair",
-            preferredJobCompletionDate: new Date("2023-10-05"),
-            dateQuoted: new Date("2023-09-05"),
+            preferredJobCompletionDate: "2023-10-05",
+            dateQuoted: "2023-09-05",
             amountQuoted: 1800.5,
             quoteAttachment: "http://example.com/quote4.pdf",
             workerId: "64c553cd69a5213214551fc7",
@@ -84,11 +86,11 @@ const jobSeed = [
             electricalRetailer: "Superb Electricity Retailer",
             energyDistributor: "Super Energy Distributor",
             mainsPhases: 3,
-            workStart: new Date("2023-09-15"),
+            workStart: "2023-09-15",
             reviewId: "64c554d669a5213214551fde",
-            workEnd: new Date("2023-09-25"),
+            workEnd: "2023-09-25",
             invoiceLink: "http://example.com/invoice4.pdf",
-            dateCreated: new Date("2023-09-10")
+            dateCreated: "2023-09-10"
         },
         
             {
@@ -97,8 +99,8 @@ const jobSeed = [
                 customerId: "64c5541869a5213214551fd1",
                 addressOfInstallation: "20 Flinders St, Adelaide, SA 5000, Australia",
                 scopeOfWork: "Roof repair and maintenance",
-                preferredJobCompletionDate: new Date("2023-11-01"),
-                dateQuoted: new Date("2023-10-01"),
+                preferredJobCompletionDate: "2023-11-01",
+                dateQuoted: "2023-10-01",
                 amountQuoted: 1900.5,
                 quoteAttachment: "http://example.com/quote5.pdf",
                 workerId: "64c553df69a5213214551fc9",
@@ -107,20 +109,20 @@ const jobSeed = [
                 electricalRetailer: "Great Electricity Retailer",
                 energyDistributor: "Prime Energy Distributor",
                 mainsPhases: 3,
-                workStart: new Date("2023-10-10"),
+                workStart: "2023-10-10",
                 reviewId: "64c554f069a5213214551fe0",
-                workEnd: new Date("2023-10-20"),
+                workEnd: "2023-10-20",
                 invoiceLink: "http://example.com/invoice5.pdf",
-                dateCreated: new Date("2023-10-05")
+                dateCreated: "2023-10-05"
             },
             {
                 _id: "64c554fc69a5213214551fe1",
-                jobStatus: "Complete",
+                jobStatus: "Closed",
                 customerId: "64c5542569a5213214551fd3",
                 addressOfInstallation: "30 North Tce, Adelaide, SA 5000, Australia",
                 scopeOfWork: "Home renovation and repair",
-                preferredJobCompletionDate: new Date("2023-11-05"),
-                dateQuoted: new Date("2023-10-05"),
+                preferredJobCompletionDate: "2023-11-05",
+                dateQuoted: "2023-10-05",
                 amountQuoted: 2100.5,
                 quoteAttachment: "http://example.com/quote6.pdf",
                 workerId: "64c5540169a5213214551fcd",
@@ -129,20 +131,20 @@ const jobSeed = [
                 electricalRetailer: "Excellent Electricity Retailer",
                 energyDistributor: "Best Energy Distributor",
                 mainsPhases: 3,
-                workStart: new Date("2023-10-15"),
+                workStart: "2023-10-15",
                 reviewId: "64c554fc69a5213214551fe2",
-                workEnd: new Date("2023-10-25"),
+                workEnd: "2023-10-25",
                 invoiceLink: "http://example.com/invoice6.pdf",
-                dateCreated: new Date("2023-10-10")
+                dateCreated: "2023-10-10"
             },
             {
                 _id: "64c5551569a5213214551fe3",
-                jobStatus: "InProgress",
+                jobStatus: "Job Implementation",
                 customerId: "64c5541869a5213214551fd1",
                 addressOfInstallation: "20 Flinders St, Adelaide, SA 5000, Australia",
                 scopeOfWork: "Landscaping and garden maintenance",
-                preferredJobCompletionDate: new Date("2023-11-10"),
-                dateQuoted: new Date("2023-10-10"),
+                preferredJobCompletionDate: "2023-11-10",
+                dateQuoted: "2023-10-10",
                 amountQuoted: 1700.5,
                 quoteAttachment: "http://example.com/quote7.pdf",
                 workerId: "64c5540a69a5213214551fcf",
@@ -151,20 +153,20 @@ const jobSeed = [
                 electricalRetailer: "Awesome Electricity Retailer",
                 energyDistributor: "Supreme Energy Distributor",
                 mainsPhases: 3,
-                workStart: new Date("2023-10-20"),
+                workStart: "2023-10-20",
                 reviewId: "64c5551569a5213214551fe4",
-                workEnd: new Date("2023-10-30"),
+                workEnd: "2023-10-30",
                 invoiceLink: "http://example.com/invoice7.pdf",
-                dateCreated: new Date("2023-10-15")
+                dateCreated: "2023-10-15"
             },
             {
                 _id: "64c5552069a5213214551fe5",
-                jobStatus: "Complete",
+                jobStatus: "Closed",
                 customerId: "64c5542569a5213214551fd3",
                 addressOfInstallation: "30 North Tce, Adelaide, SA 5000, Australia",
                 scopeOfWork: "Interior design and decoration",
-                preferredJobCompletionDate: new Date("2023-11-15"),
-                dateQuoted: new Date("2023-10-15"),
+                preferredJobCompletionDate: "2023-11-15",
+                dateQuoted: "2023-10-15",
                 amountQuoted: 2300.5,
                 quoteAttachment: "http://example.com/quote8.pdf",
                 workerId: "64c5540a69a5213214551fcf",
@@ -173,13 +175,14 @@ const jobSeed = [
                 electricalRetailer: "Top Notch Electricity Retailer",
                 energyDistributor: "Leading Energy Distributor",
                 mainsPhases: 3,
-                workStart: new Date("2023-10-25"),
+                workStart: "2023-10-25",
                 reviewId: "64c5552069a5213214551fe6",
-                workEnd: new Date("2023-11-05"),
+                workEnd: "2023-11-05",
                 invoiceLink: "http://example.com/invoice8.pdf",
-                dateCreated: new Date("2023-10-20")
+                dateCreated: "2023-10-20"
             }
-        ];
         
+        
+];
     
-    
+module.exports = jobSeed;
