@@ -7,12 +7,10 @@ const app = express();
 
 const PORT = process.env.PORT || 3001
 const HOST = process.env.HOST || '127.0.0.1'
-// const User = require('./models/user')
-const Job = require('./models/job')
-// const Review = require('./models/review')
-// const reviewSeed= require('./services/reviewSeed')
-// const userSeed= require('./services/userSeed')
-const jobSeed= require('./services/jobSeed')
+
+const seedJobs = require('./services/jobSeed');
+const seedUser = require('./services/userSeed'); // Or wherever your seedUser function is
+const seedReview = require('./services/reviewSeed'); // Or whe
 
 
 
@@ -77,53 +75,26 @@ app.get("/databaseHealth", (request, response) => {
 });
 
 
-app.post("/seedDatabase", (request, response)=> {
+app.get("/seedDatabase",  async (request, response)=> {
 
-
+	try {
+		const jobs = await seedJobs();
+		const users = await seedUser();
+		const reviews = await seedReview();
+		
+		response.json({
+		  jobs: jobs.message,
+		  users: users.message,
+		  reviews: reviews.message
+		});
+	  } catch (err) {
+		console.error('Error in seeding data: ', err);
+		response.status(500).send('Error in seeding data');
+	  }
 	
-	Job.deleteMany({})
-	.then(() => Job.insertMany(jobSeed))
-	.then(data => {
-	  console.log('Data imported! ', data);
-	response.json({
-		message:"The Jobs database was  seeded"
-	});
-	  process.exit(0);
-	})
-	.catch(err => {
-	  console.error('Error  importing  Jobs data:  ', err);
-	  process.exit(1);
-	});
-
-	// User.deleteMany({})
-	// .then(() => User.insertMany(userSeed))
-	// .then(data => {
-	// //   console.log('Data imported! ', data);
-	// response.json({
-	// 	message:"The User database was seeded"
-	// });
-	//   process.exit(0);
-	// })
-	// .catch(err => {
-	//   console.error('Error importing User data: ', err);
-	//   process.exit(1);
-	// });
-
-	// Review.deleteMany({})
-	// .then(() =>  Review.insertMany(reviewSeed))
-	// .then(data => {
-	// //   console.log('Data imported! ', data);
-	// response.json({
-	// 	message:"The   Review database was seeded"
-	// });
-	//   process.exit (0);
-	// })
-	// .catch(err => {
-	//   console.error('Error importing Review data: ', err);
-	//   process.exit(1);
-	// });
 	
-})
+	
+});
 
 app.get("/", (request, response) => {
 	response.json({

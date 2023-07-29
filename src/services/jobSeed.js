@@ -1,3 +1,26 @@
+const Job = require('../models/job')
+
+
+const seedJobs = () => {
+    return Job.deleteMany({})
+      .then(() => Job.insertMany(jobSeed))
+      .then(data => {
+        console.log('Data imported! ', data);
+        return {
+          message:"The Jobs database was seeded"
+        };
+      })
+      .catch(err => {
+        console.error('Error importing Jobs data: ', err);
+        process.exit(1);
+      });
+  }
+  
+
+
+
+
+
 const jobSeed = [
     {
         _id: "64c554a069a5213214551fd7",
@@ -185,4 +208,4 @@ const jobSeed = [
         
 ];
     
-module.exports = jobSeed;
+module.exports = seedJobs;
