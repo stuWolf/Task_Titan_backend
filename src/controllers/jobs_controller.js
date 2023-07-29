@@ -52,7 +52,7 @@ const getMyJobsOpen = async (req, res) => {
     const jobs = await Job.find({ jobStatus: { $ne: 'Closed' }, customerId: req.user.user_id });
     // console.log('customerId  ' + customerId)
     if (jobs.length === 0) {
-      return res.status(404).json({ message: 'you have no open jobs' });
+      return res.status(404).json({ message404: 'you have no open jobs' });
     }
     res.json(jobs);
   } catch (error) {
@@ -65,7 +65,7 @@ const getAllJobsOpenWorker = async (req, res) => {
   try {
     const jobs = await Job.find({ jobStatus: { $ne: 'Closed' }, workerId: req.user.user_id });
     if (jobs.length === 0) {
-      return res.status(404).json({ message: 'No Jobs found for this worker' });
+      return res.status(404).json({ message404: 'No Jobs found for this worker' });
     }
     res.json(jobs);
   } catch (error) {
