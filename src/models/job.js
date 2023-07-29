@@ -40,7 +40,7 @@ const JobSchema = new mongoose.Schema({
   workerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // referencing the User model again
-    required: true
+ 
   },
   maximumDemandInAmps: {
     type: Number

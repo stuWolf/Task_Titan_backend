@@ -7,6 +7,9 @@ const app = express();
 
 const PORT = process.env.PORT || 3001
 const HOST = process.env.HOST || '127.0.0.1'
+const User = require('./models/user')
+const Job = require('./models/job')
+const Review = require('./models/review')
 
 const helmet = require('helmet')
 app.use(helmet());
@@ -66,6 +69,26 @@ app.get("/databaseHealth", (request, response) => {
         dbHost: databaseHost
     })
 });
+
+
+app.post("/seedDatabase", (request, response)=> {
+
+	Job.deleteMany({})
+	.then(() => Job.insertMany(jobSeed))
+	.then(data => {
+	  console.log('Data imported! ', data);
+	  process.exit(0);
+	})
+	.catch(err => {
+	  console.error('Error importing data: ', err);
+	  process.exit(1);
+	});
+
+
+	response.json({
+		message:"The database was seeded"
+	});
+})
 
 app.get("/", (request, response) => {
 	response.json({
