@@ -7,7 +7,7 @@ const getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.find();
     if (reviews.length === 0) {
-      res.status(404).json({ message: "No reviews found" });
+      res.status(404).json({ message404: "No reviews found" });
     } else {
       res.json(reviews);
     }
@@ -21,7 +21,7 @@ const getJobReview = async (req, res) => {
   try {
     const reviews = await Review.find({ jobId: req.params.jobId });
     if (reviews.length === 0) {
-      res.status(404).json({ message: "No reviews found for this job" });
+      res.status(404).json({ message404: "No reviews found for this job" });
     } else {
       res.json(reviews);
     }
@@ -35,7 +35,7 @@ const getWorkerReview = async (req, res) => {
   try {
     const reviews = await Review.find({ workerId: req.params.workerId });
     if (reviews.length === 0) {
-      res.status(404).json({ message: "No reviews found for this worker" });
+      res.status(404).json({ message404: "No reviews found for this worker" });
     } else {
       res.json(reviews);
     }
@@ -49,7 +49,7 @@ const getCustomerReview = async (req, res) => {
   try {
     const reviews = await Review.find({ userId: req.params.customerId });
     if (reviews.length === 0) {
-      res.status(404).json({ message: "No reviews found for this customer" });
+      res.status(404).json({ message404: "No reviews found for this customer" });
     } else {
       res.json(reviews);
     }
@@ -82,7 +82,7 @@ const deleteReview = async (req, res) => {
     if (review) {
       res.json({ message: 'Review deleted' });
     } else {
-      res.status(404).json({ message: 'Review not found' });
+      res.status(404).json({ message404: 'Review not found' });
     }
   } catch (error) {
     printError(error, res);
@@ -106,7 +106,7 @@ const getReview = async (req, res) => {
     if (review) {
       res.json(review);
     } else {
-      res.status(404).json({ message: 'Review not found' });
+      res.status(404).json({ message404: 'Review not found' });
     }
   } catch (error) {
     printError(error, res);
