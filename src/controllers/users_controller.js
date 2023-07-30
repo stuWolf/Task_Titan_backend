@@ -14,7 +14,7 @@ const getLoggedInUser = async (request, res) => {
     console.log( 'userid from logged in user ' + request.user.user_id);
     if (!user) {
       
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message404: 'User not found' });
       
     }
     res.json(user);
@@ -35,7 +35,7 @@ const getUsers = async (req, res) => {
     const users = await User.find({userStatus: req.params.userStatus});
     
     if (users.length === 0) {
-      res.status(404).jason({ message: "No users found" });
+      res.status(404).jason({ message404: "No users found" });
     } else {
       res.json(users);
     }
@@ -53,7 +53,7 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     if (users.length === 0) {
-      res.status(404).json({ message: "No users found" });
+      res.status(404).json({ message404: "No users found" });
     } else {
       res.json(users);
     }
@@ -82,7 +82,7 @@ const getUser = async (req, res) => {
     if (user) {
       res.json(user);
     } else {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message404: "User not found" });
     }
   } catch (error) {
     printError(error, res);
@@ -96,7 +96,7 @@ const updateUser = async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message404: "User not found" });
     }
 
     // if email was updated and is not the email of current user
@@ -157,7 +157,7 @@ const deleteUser = async (req, res) => {
     if (user) {
       res.json({ message: 'User deleted' });
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message404: 'User not found' });
     }
   } catch (error) {
     printError(error, res);
