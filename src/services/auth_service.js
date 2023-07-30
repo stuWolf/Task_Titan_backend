@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 const createToken = (user_id, username) => {
-    console.log('createToken  ' + username)
+    // console.log('createToken  ' + username)
     return jwt.sign(
         {
             user_id: user_id,
@@ -14,8 +14,8 @@ const createToken = (user_id, username) => {
 }
 
 const verifyToken = (token)=> {
-    console.log('verify token  ')
-    console.log('verify token  '+ token )
+    // console.log('verify token  ')
+    // console.log('verify token  '+ token )
     try{
         return jwt.verify(token, process.env.JWT_SECRET_KEY);
     } catch (error) {

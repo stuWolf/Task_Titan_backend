@@ -75,26 +75,7 @@ app.get("/databaseHealth", (request, response) => {
 });
 
 
-app.get("/seedDatabase",  async (request, response)=> {
 
-	try {
-		const jobs = await seedJobs();
-		const users = await seedUser();
-		const reviews = await seedReview();
-		
-		response.json({
-		  jobs: jobs.message,
-		  users: users.message,
-		  reviews: reviews.message
-		});
-	  } catch (err) {
-		console.error('Error in seeding data: ', err);
-		response.status(500).send('Error in seeding data');
-	  }
-	
-	
-	
-});
 
 app.get("/", (request, response) => {
 	response.json({
@@ -119,6 +100,27 @@ app.use("/jobs", jobsRouter)
 
 const reviewsRouter = require('./routes/reviews_routes');
 app.use("/reviews", reviewsRouter)
+
+app.get("/seedDatabase",  async (request, response)=> {
+
+	try {
+		const jobs = await seedJobs();
+		const users = await seedUser();
+		const reviews = await seedReview();
+		
+		response.json({
+		  jobs: jobs.message,
+		  users: users.message,
+		  reviews: reviews.message
+		});
+	  } catch (err) {
+		console.error('Error in seeding data: ', err);
+		response.status(500).send('Error in seeding data');
+	  }
+	
+	
+	
+});
 
 
 app.get('*', (request, response) =>{

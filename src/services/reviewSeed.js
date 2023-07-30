@@ -15,7 +15,7 @@ const reviewSeed  = [
         stars: 5,
         review: "The worker did an excellent job. Highly recommended!",
     },
-    
+
     {
        
         jobId: "60fe580f87a9d3a2204869ee",
@@ -97,7 +97,7 @@ const seedReview = () => {
       .then(() => Review.insertMany(reviewSeed))
       .then(data => {
         return {
-          message:"The Review database was seeded"
+          message:"The Review collectiom was seeded"
         };
       })
       .catch(err => {

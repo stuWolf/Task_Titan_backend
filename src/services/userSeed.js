@@ -117,7 +117,7 @@ const seedUser = () => {
       .then(() => User.insertMany(userSeed))
       .then(data => {
         return {
-          message:"The User database was seeded"
+          message:"The User collection was seeded"
         };
       })
       .catch(err => {

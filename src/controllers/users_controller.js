@@ -25,11 +25,14 @@ const getLoggedInUser = async (request, res) => {
 
 
 
+
+
+
 //  get users of a certain status
 const getUsers = async (req, res) => {
 
   try {
-    const users = await User.find({ userStatus: req.body.userStatus });
+    const users = await User.find({userStatus: req.params.userStatus});
     
     if (users.length === 0) {
       res.status(404).jason({ message: "No users found" });
@@ -38,7 +41,7 @@ const getUsers = async (req, res) => {
     }
  
   } catch (error) {
-    console.log(userStatus);
+    // console.log(userStatus);
     printError(error, res);
   }
   

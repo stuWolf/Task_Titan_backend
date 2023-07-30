@@ -19,7 +19,7 @@ usersRouter.get("/loggedIn", getLoggedInUser);
 
 //  get users of a certain status
 // used in: search function, admin, manage workers
-usersRouter.get("/users", getUsers);
+usersRouter.get("/users/:userStatus", getUsers);
 
 //  get all users 
 // used in: admin

@@ -42,6 +42,11 @@ const JobSchema = new mongoose.Schema({
     ref: 'User', // referencing the User model again
  
   },
+
+  workStarted: {
+    type: Date,
+
+  },
   maximumDemandInAmps: {
     type: Number
   },

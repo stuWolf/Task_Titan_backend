@@ -7,7 +7,7 @@ const seedJobs = () => {
       .then(data => {
         console.log('Data imported! ', data);
         return {
-          message:"The Jobs database was seeded"
+          message:"The Jobs collection was seeded"
         };
       })
       .catch(err => {
@@ -29,7 +29,6 @@ const jobSeed = [
         addressOfInstallation: "20 Flinders St, Adelaide, SA 5000, Australia",
         scopeOfWork: "Electrical installation and maintenance",
         preferredJobCompletionDate: "2023-12-01T00:00:00.00Z",
-        prefDate: "2023-07-15T00:00:00.000Z",
         dateQuoted: "2023-08-25",
         amountQuoted: 1300.5,
         quoteAttachment: "http://example.com/quote1.pdf",
@@ -39,7 +38,7 @@ const jobSeed = [
         electricalRetailer: "Best Electricity Retailer",
         energyDistributor: "Top Energy Distributor",
         mainsPhases: 3,
-        workStart: "2023-12-01T00:00:00.000Z",
+        workStarted: "2023-12-01T00:00:00.000Z",
         reviewId: "64c554a069a5213214551fd8",
         workEnd: "2023-12-01T00:00:00.000Z",
         invoiceLink: "http://example.com/invoice1.pdf",
@@ -48,7 +47,7 @@ const jobSeed = [
 
     {
         _id: "64c554b269a5213214551fd9",
-        jobStatus: "Draft",
+        jobStatus: "Worker Assignment",
         customerId: "64c5542569a5213214551fd3",
         addressOfInstallation: "30 North Tce, Adelaide, SA 5000, Australia",
         scopeOfWork: "Electrical installation and repair",
@@ -62,7 +61,7 @@ const jobSeed = [
         electricalRetailer: "Next Electricity Retailer",
         energyDistributor: "Super Energy Distributor",
         mainsPhases: 3,
-        workStart: "2023-09-05",
+        workStarted: "2023-09-05",
         reviewId: "64c554b269a5213214551fda",
         workEnd: "2023-09-15",
         invoiceLink: "http://example.com/invoice2.pdf",
@@ -82,12 +81,13 @@ const jobSeed = [
             amountQuoted: 1700.5,
             quoteAttachment: "http://example.com/quote3.pdf",
             workerId: "64c553df69a5213214551fc9",
+            
             maximumDemandInAmps: 80,
             consumerMainsCapacity: 140,
             electricalRetailer: "Excellent Electricity Retailer",
             energyDistributor: "Mega Energy Distributor",
             mainsPhases: 3,
-            workStart: "2023-09-10",
+            workStarted: "2023-09-10",
             reviewId: "64c554c869a5213214551fdc",
             workEnd: "2023-09-20",
             invoiceLink: "http://example.com/invoice3.pdf",
@@ -104,12 +104,13 @@ const jobSeed = [
             amountQuoted: 1800.5,
             quoteAttachment: "http://example.com/quote4.pdf",
             workerId: "64c553cd69a5213214551fc7",
+            
             maximumDemandInAmps: 90,
             consumerMainsCapacity: 150,
             electricalRetailer: "Superb Electricity Retailer",
             energyDistributor: "Super Energy Distributor",
             mainsPhases: 3,
-            workStart: "2023-09-15",
+            workStarted: "2023-09-15",
             reviewId: "64c554d669a5213214551fde",
             workEnd: "2023-09-25",
             invoiceLink: "http://example.com/invoice4.pdf",
@@ -127,12 +128,13 @@ const jobSeed = [
                 amountQuoted: 1900.5,
                 quoteAttachment: "http://example.com/quote5.pdf",
                 workerId: "64c553df69a5213214551fc9",
+                
                 maximumDemandInAmps: 100,
                 consumerMainsCapacity: 200,
                 electricalRetailer: "Great Electricity Retailer",
                 energyDistributor: "Prime Energy Distributor",
                 mainsPhases: 3,
-                workStart: "2023-10-10",
+                workStarted: "2023-10-10",
                 reviewId: "64c554f069a5213214551fe0",
                 workEnd: "2023-10-20",
                 invoiceLink: "http://example.com/invoice5.pdf",
@@ -140,7 +142,7 @@ const jobSeed = [
             },
             {
                 _id: "64c554fc69a5213214551fe1",
-                jobStatus: "Closed",
+                jobStatus: "Customer Review",
                 customerId: "64c5542569a5213214551fd3",
                 addressOfInstallation: "30 North Tce, Adelaide, SA 5000, Australia",
                 scopeOfWork: "Home renovation and repair",
@@ -149,12 +151,13 @@ const jobSeed = [
                 amountQuoted: 2100.5,
                 quoteAttachment: "http://example.com/quote6.pdf",
                 workerId: "64c5540169a5213214551fcd",
+                
                 maximumDemandInAmps: 120,
                 consumerMainsCapacity: 240,
                 electricalRetailer: "Excellent Electricity Retailer",
                 energyDistributor: "Best Energy Distributor",
                 mainsPhases: 3,
-                workStart: "2023-10-15",
+                workStarted: "2023-10-15",
                 reviewId: "64c554fc69a5213214551fe2",
                 workEnd: "2023-10-25",
                 invoiceLink: "http://example.com/invoice6.pdf",
@@ -171,12 +174,13 @@ const jobSeed = [
                 amountQuoted: 1700.5,
                 quoteAttachment: "http://example.com/quote7.pdf",
                 workerId: "64c5540a69a5213214551fcf",
+                
                 maximumDemandInAmps: 110,
                 consumerMainsCapacity: 220,
                 electricalRetailer: "Awesome Electricity Retailer",
                 energyDistributor: "Supreme Energy Distributor",
                 mainsPhases: 3,
-                workStart: "2023-10-20",
+                workStarted: "2023-10-20",
                 reviewId: "64c5551569a5213214551fe4",
                 workEnd: "2023-10-30",
                 invoiceLink: "http://example.com/invoice7.pdf",
@@ -193,12 +197,13 @@ const jobSeed = [
                 amountQuoted: 2300.5,
                 quoteAttachment: "http://example.com/quote8.pdf",
                 workerId: "64c5540a69a5213214551fcf",
+                
                 maximumDemandInAmps: 130,
                 consumerMainsCapacity: 260,
                 electricalRetailer: "Top Notch Electricity Retailer",
                 energyDistributor: "Leading Energy Distributor",
                 mainsPhases: 3,
-                workStart: "2023-10-25",
+                workStarted: "2023-10-25",
                 reviewId: "64c5552069a5213214551fe6",
                 workEnd: "2023-11-05",
                 invoiceLink: "http://example.com/invoice8.pdf",
