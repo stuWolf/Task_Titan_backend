@@ -58,9 +58,9 @@ const updateJob = async (req, res) => {
     if (!job) {
       return res.status(404).json({ message: "Job not found" });
     }
-    if (job.customerId.toString() !== req.user.user_id) {
-      return res.status(403).json({ message: "You don't have permission to update this job" });
-    }
+    // if (job.customerId.toString() !== req.user.user_id) {
+    //   return res.status(403).json({ message: "You don't have permission to update this job" });
+    // }
     
     // Delete customerId from req.body to prevent it from being updated
     delete req.body.customerId;
@@ -133,7 +133,7 @@ const getMyJob = async (req, res) => {
       const jobs = await Job.find({ customerId: req.user.user_id });
       // const jobs = await Job.find({ customerId: req.params.id });
       res.json(jobs);
-    } catch (error) {
+    } catch (error) {404
       printError(error, res);
     }
   };

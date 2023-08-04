@@ -67,7 +67,10 @@ const JobSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review', // assuming you have a Review model
   },
-  
+  dateCompleted: {
+    type: Date
+    
+  },
   invoiceLink: {
     type: String,
     default: 'link to invoice.PDF'
