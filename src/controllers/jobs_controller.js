@@ -129,7 +129,7 @@ const getStatusJobs = async (req, res) => {
 const getMyJob = async (req, res) => {
   //  console.log('request.params  ' + request.params) 
     try {
-      console.log('user  ' + req.user.user_id)
+      // console.log('user  ' + req.user.user_id)
       const jobs = await Job.find({ customerId: req.user.user_id });
       // const jobs = await Job.find({ customerId: req.params.id });
       res.json(jobs);
