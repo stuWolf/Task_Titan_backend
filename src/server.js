@@ -28,7 +28,7 @@ app.use(helmet.contentSecurityPolicy({
 
 const cors = require('cors')
 let corsOptions = {
-	origin: ["http://localhost:3000", "https://tasktitan-2ec5140db0ab.herokuapp.com/"],
+	origin: ["http://localhost:3000", "https://integration--task-titan.netlify.app"],
 	optionsSuccessStatus: 200    // hiroku
 }
 
@@ -80,7 +80,7 @@ app.get("/databaseHealth", (request, response) => {
 
 app.get("/", (request, response) => {
 	response.json({
-		message:"Welcome to the note taking backend"
+		message:"Welcome to the TASK TITAN backend"
 	});
 });
 
