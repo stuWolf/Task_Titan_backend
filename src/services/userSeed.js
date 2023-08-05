@@ -29,8 +29,8 @@ const userSeed = [
         address: "100 George St, Sydney, NSW 2000, Australia",
         contactNumber: 412345679,
         dob: new Date("1984-04-20T00:00:00.000Z"),
-        license: "XYZ222",
-        licenseNo: "222222",
+        license: "A grade",
+        licenseNo: "A222222",
         employedSince: new Date("2019-06-25T00:00:00.000Z"),
         __v: 0
     },
@@ -44,8 +44,8 @@ const userSeed = [
         address: "50 Queen St, Brisbane, QLD 4000, Australia",
         contactNumber: 412345680,
         dob: new Date("1985-03-30T00:00:00.000Z"),
-        license: "XYZ333",
-        licenseNo: "333333",
+        license: "A grade",
+        licenseNo: "A45389",
         employedSince: new Date("2021-02-10T00:00:00.000Z"),
         __v: 0
     },
@@ -59,8 +59,8 @@ const userSeed = [
         address: "70 King St, Perth, WA 6000, Australia",
         contactNumber: 412345681,
         dob: new Date("1986-02-15T00:00:00.000Z"),
-        license: "XYZ444",
-        licenseNo: "444444",
+        license: "A grade",
+        licenseNo: "A 444444",
         employedSince: new Date("2018-09-05T00:00:00.000Z"),
         __v: 0
     },
@@ -73,10 +73,7 @@ const userSeed = [
         password: "$2b$10$ySPLEEPuCiSN7U/uySXeNuwnKqWSXU7EWFMkUI5zpMIn0l4vN5FFG",
         address: "20 Flinders St, Adelaide, SA 5000, Australia",
         contactNumber: 412345682,
-        dob: new Date("1987-01-05T00:00:00.000Z"),
-        license: "XYZ555",
-        licenseNo: "555555",
-        employedSince: new Date("2022-05-01T00:00:00.000Z"),
+        
         __v: 0
     },
     {
@@ -88,10 +85,7 @@ const userSeed = [
         password: "$2b$10$.f.AzDBU3mLqRiBMU5etYuAJTdD6gd3VbPFzC0i/jbhpMG8pY333O",
         address: "30 North Tce, Adelaide, SA 5000, Australia",
         contactNumber: 412345683,
-        dob: new Date("1988-12-25T00:00:00.000Z"),
-        license: "XYZ666",
-        licenseNo: "666666",
-        employedSince: new Date("2022-07-01T00:00:00.000Z"),
+        
         __v: 0
     },
     {
