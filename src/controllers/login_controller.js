@@ -40,7 +40,9 @@ const signup = async (request, response) => {
 }
 
 const login = async (request, response) => {
-    
+    console.log('login function started server')
+  // response.header("Access-Control-Allow-Origin", "http://localhost:3000", "https://task-titan.netlify.app"); // Or specify your frontend domain instead of '*'
+    // response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     const user = await User.findOne({email: request.body.email})
     try { 
     if (user && bcrypt.compareSync(request.body.password, user.password)){

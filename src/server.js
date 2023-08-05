@@ -28,7 +28,7 @@ app.use(helmet.contentSecurityPolicy({
 
 const cors = require('cors')
 let corsOptions = {
-	origin: ["http://localhost:3000", "https://integration--task-titan.netlify.app"],
+	origin: ["http://localhost:3000", "https://task-titan.netlify.app"],
 	optionsSuccessStatus: 200    // hiroku
 }
 
@@ -91,6 +91,9 @@ app.use("/login", loginRouter)
 // add a middleware that validates user authentication for all notes routes
 const validateRequest = require('./middlewares/auth_middleware');
 app.use(validateRequest)
+
+// const loginRouter = require('./routes/login_routes')
+// app.use("/login", loginRouter)
 
 const usersRouter = require('./routes/users_routes')
 app.use("/users", usersRouter)

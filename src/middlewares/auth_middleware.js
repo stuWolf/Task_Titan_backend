@@ -21,6 +21,7 @@ const validateRequest = (request, response, next) => {
         }
         
     } catch (error) {
+        console.error("Error in validateRequest:", error);
         next(error)
     }
     
