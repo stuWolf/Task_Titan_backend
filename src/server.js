@@ -5,9 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose')
 const app = express();
 
-const PORT = process.env.PORT || 3001
-// const HOST = process.env.HOST || '127.0.0.1'
-const HOST = process.env.HOST || '0.0.0.0'
+const PORT = process.env.PORT || 3001    // connection port, must be set in frontend REACT_APP_BACKEND_URL package.json and .env
+const HOST = process.env.HOST || '127.0.0.1'
+// const HOST = process.env.HOST || '0.0.0.0'
 
 const seedJobs = require('./services/jobSeed');
 const seedUser = require('./services/userSeed'); // Or wherever your seedUser function is
