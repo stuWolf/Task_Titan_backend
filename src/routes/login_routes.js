@@ -9,11 +9,18 @@ const {
 const loginRouter = express.Router();
 const cors = require('cors')
 let corsOptions = {
-	origin: ["http://localhost:3000", "https://task-titan.netlify.app"],
+	// origin: ["http://localhost:3000", "https://task-titan.netlify.app"],
+  origin: ["http://localhost:3000", "*"],
 	optionsSuccessStatus: 200    // hiroku
 }
 
 app.use(cors(corsOptions))
+
+
+// I get the following error:  Cross-Origin Request Blocked: 
+// The Same Origin Policy disallows reading the remote resource at 
+// https://task-titan-render.onrender.com/login. (Reason: CORS request did not succeed). Status code: (null).
+
 
 //  signup a new user, general
 loginRouter.post("/signup", signup);
