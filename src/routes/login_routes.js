@@ -1,4 +1,5 @@
 const express = require('express');
+const app = express();
 const {
   signup,
   login,
@@ -6,7 +7,13 @@ const {
 } = require('../controllers/login_controller');
 
 const loginRouter = express.Router();
+const cors = require('cors')
+let corsOptions = {
+	origin: ["http://localhost:3000", "https://task-titan.netlify.app"],
+	optionsSuccessStatus: 200    // hiroku
+}
 
+app.use(cors(corsOptions))
 
 //  signup a new user, general
 loginRouter.post("/signup", signup);
