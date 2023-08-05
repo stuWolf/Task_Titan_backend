@@ -6,7 +6,8 @@ const mongoose = require('mongoose')
 const app = express();
 
 const PORT = process.env.PORT || 3001
-const HOST = process.env.HOST || '127.0.0.1'
+// const HOST = process.env.HOST || '127.0.0.1'
+const HOST = process.env.HOST || '0.0.0.0'
 
 const seedJobs = require('./services/jobSeed');
 const seedUser = require('./services/userSeed'); // Or wherever your seedUser function is
@@ -28,7 +29,7 @@ app.use(helmet.contentSecurityPolicy({
 const cors = require('cors')
 let corsOptions = {
 	origin: ["http://localhost:3000", "https://bespoke-klepon-bc5d33.netlify.app"],
-	optionsSuccessStatus: 200
+	optionsSuccessStatus: 200    // hiroku
 }
 
 app.use(cors(corsOptions))
