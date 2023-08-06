@@ -28,7 +28,7 @@ app.use(helmet.contentSecurityPolicy({
 
 const cors = require('cors')
 let corsOptions = {
-	origin: ["http://localhost:3000", "https://task-titan.netlify.app"],
+	origin: ["http://localhost:3000", "*"],
 	optionsSuccessStatus: 200    // hiroku
 }
 
