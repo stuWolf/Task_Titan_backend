@@ -10,10 +10,13 @@ const {
   deleteJob,
   deleteAllJobs,
   getMyJobsOpen,
+  getCountOfJobs,
   getAllJobsOpenWorker
 } = require('../controllers/jobs_controller');
 
 const jobsRouter = express.Router();
+
+jobsRouter.get("/count", getCountOfJobs);
 
 //  get all jobs with status "open" , OK
 // used in: manager view

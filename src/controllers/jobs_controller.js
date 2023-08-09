@@ -1,7 +1,15 @@
 const Job = require('../models/job');
 const { printError } = require('../services/print_error');
 
-
+// get the count of all jobs
+const getCountOfJobs = async (req, res) => {
+  try {
+    const count = await Job.countDocuments();
+    res.json({ totalJobs: count });
+  } catch (error) {
+    printError(error, res);
+  }
+};
 
 
 //  get all jobs
@@ -176,6 +184,7 @@ module.exports = {
   getAllJobs,
   getStatusJobs,
   getOpenJobs,
+  getCountOfJobs,
   getJob,
   getMyJob,
   createJob,

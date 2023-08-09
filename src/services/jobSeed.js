@@ -40,7 +40,7 @@ const jobSeed = [
         mainsPhases: 3,
         workStarted: "2023-12-01T00:00:00.000Z",
         reviewId: "64c554a069a5213214551fd8",
-        workEnd: "2023-12-01T00:00:00.000Z",
+        dateCompleted: "2023-12-01T00:00:00.000Z",
         invoiceLink: "http://example.com/invoice1.pdf",
         dateCreated: "2023-08-25"
     },

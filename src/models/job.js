@@ -24,8 +24,8 @@ const JobSchema = new mongoose.Schema({
     required: true
   },
   dateCreated: {
-    type: Date,
-    default: Date.now
+    type: Date
+    
   },
   dateQuoted: {
     type: Date
