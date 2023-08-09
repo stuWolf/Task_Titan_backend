@@ -11,6 +11,7 @@ const {
   deleteAllJobs,
   getMyJobsOpen,
   getCountOfJobs,
+  getCountOfJobsWorker,
   getAllJobsOpenWorker
 } = require('../controllers/jobs_controller');
 
@@ -19,6 +20,9 @@ const jobsRouter = express.Router();
 
 // count all jobs of optional user id, if no id provided, all jobs are counted
 jobsRouter.get("/count/:customerId?", getCountOfJobs);
+
+// count all jobs of optional user id, if no id provided, all jobs are counted
+jobsRouter.get("/countWorker/:workerId", getCountOfJobsWorker);
 
 //  get all jobs with status "open" , OK
 // used in: manager view

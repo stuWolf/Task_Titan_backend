@@ -9,22 +9,44 @@ const getCountOfJobs = async (req, res) => {
     let customerId = req.params.customerId
     if (req.params.customerId) {
       // If ID is provided, count documents with that ID
-      count = await Job.countDocuments({ customerId: req.params.customerId });
+      count = await Job.countDocuments({ 
+    customerId: req.params.customerId,
+      jobStatus: { $ne: 'Closed' }  // $ne means "not equal to"
+      });
     } else {
       // If no ID is provided, count all documents
-      count = await Job.countDocuments({});
+      count = await Job.countDocuments({
+        jobStatus: { $ne: 'Closed' }  // $ne means "not equal to"
+
+      });
+      
     }
     if (count) {
     res.json({ totalJobs: count });
     }else {
-      res.status(404).json({ message404: "no jobs found for this customer id" });
+      res.status(404).json({ message404: "no jobs found for this customer id",customerId });
     }
   } catch (error) {
     printError(error, res);
   }
 };
 
-
+/// Get the count of jobs for a worker where the status is not "closed"
+const getCountOfJobsWorker = async (req, res) => {
+  try {
+    const count = await Job.countDocuments({ 
+      workerId: req.params.workerId,
+      jobStatus: { $ne: 'Closed' }  // $ne means "not equal to"
+    });
+    if (count) {
+      res.json({ totalJobs: count });
+    } else {
+      res.status(404).json({ message404: "The worker has no jobs or all jobs are closed" });
+    }
+  } catch (error) {
+    printError(error, res);
+  }
+};
 
 //  get all jobs
 const getAllJobs = async (req, res) => {
@@ -134,7 +156,19 @@ const getOpenJobs = async (req, res) => {
 //  get all jobs with a certain status
 const getStatusJobs = async (req, res) => {
   try {
-    const jobs = await Job.find({ jobStatus: req.params.status });
+    let query = {};
+    const status = req.params.status;
+
+    // Check if the status starts with "!"
+    if (status.startsWith('!')) {
+      // If it does, use the $ne (not equal) operator
+      query.jobStatus = { $ne: status.slice(1) }; // Remove the "!" and use the rest of the string
+    } else {
+      // If not, just match the status
+      query.jobStatus = status;
+    }
+
+    const jobs = await Job.find(query);
     if (jobs.length === 0) {
       return res.status(404).json({ message404: 'No Jobs found with this status' });
     }
@@ -199,6 +233,7 @@ module.exports = {
   getStatusJobs,
   getOpenJobs,
   getCountOfJobs,
+  getCountOfJobsWorker,
   getJob,
   getMyJob,
   createJob,

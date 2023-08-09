@@ -57,11 +57,28 @@ switch(process.env.NODE_ENV.toLowerCase()){
 // create a connection
 const {databaseConnector} = require("./database")
 databaseConnector(databaseURL).then(() =>{
-	console.log("connected to the db!")
+	console.log("connected to the db!");
+
+
+    // // Set up the change stream for the 'jobs' collection
+    // const jobChangeStream = mongoose.connection.collection('jobs').watch();
+    // jobChangeStream.on('change', (change) => {
+    //     console.log('Change detected in jobs collection:', change);
+    //     changeFlag = true; // Update the global flag
+    // });
+	// var changeStreams =  mongoose.connection.modelNames('Job').watch()
+	// changeStreams.on('change', function(change){
+	//   console.log(change)  
+	// })
+
+
+
+	
 }).catch(error => {
 	console.log("could not connect to the db!")
 	console.log(error)
 })
+
 
 app.get("/databaseHealth", (request, response) => {
     let databaseState = mongoose.connection.readyState;
