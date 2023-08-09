@@ -2,14 +2,28 @@ const Job = require('../models/job');
 const { printError } = require('../services/print_error');
 
 // get the count of all jobs
+// count all jobs of optional user id, if no id provided, all jobs are counted
 const getCountOfJobs = async (req, res) => {
   try {
-    const count = await Job.countDocuments();
+    let count;
+    let customerId = req.params.customerId
+    if (req.params.customerId) {
+      // If ID is provided, count documents with that ID
+      count = await Job.countDocuments({ customerId: req.params.customerId });
+    } else {
+      // If no ID is provided, count all documents
+      count = await Job.countDocuments({});
+    }
+    if (count) {
     res.json({ totalJobs: count });
+    }else {
+      res.status(404).json({ message404: "no jobs found for this customer id" });
+    }
   } catch (error) {
     printError(error, res);
   }
 };
+
 
 
 //  get all jobs
@@ -32,7 +46,7 @@ const getJob = async (req, res) => {
     if (job) {
       res.json(job);
     } else {
-      res.status(404).json({ message: "Job not found" });
+      res.status(404).json({ message404: "Job not found" });
     }
   } catch (error) {
     printError(error, res);

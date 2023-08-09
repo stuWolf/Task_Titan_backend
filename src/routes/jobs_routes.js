@@ -16,7 +16,9 @@ const {
 
 const jobsRouter = express.Router();
 
-jobsRouter.get("/count", getCountOfJobs);
+
+// count all jobs of optional user id, if no id provided, all jobs are counted
+jobsRouter.get("/count/:customerId?", getCountOfJobs);
 
 //  get all jobs with status "open" , OK
 // used in: manager view
