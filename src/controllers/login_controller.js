@@ -50,6 +50,8 @@ const login = async (request, response) => {
         response.status(200).json({
           user_ID: user._id,
        userStatus: user.userStatus,
+       firstName:user.firstName,
+       lastName: user.lastName,
             email: user.email,
             token: token
         })
