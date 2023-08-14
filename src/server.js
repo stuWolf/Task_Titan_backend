@@ -99,7 +99,7 @@ app.get("/databaseHealth", (request, response) => {
 
 app.get("/", (request, response) => {
 	response.json({
-		message:"Welcome to the TASK TITAN backend"
+		message:"Welcome to the TASK TITAN backend Release 150823 V1.1"
 	});
 });
 

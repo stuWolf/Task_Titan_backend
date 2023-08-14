@@ -2,51 +2,40 @@ const Job = require('../models/job');
 const { printError } = require('../services/print_error');
 
 // get the count of all jobs
-// count all jobs of optional user id, if no id provided, all jobs are counted
+// configuration (user_id, userStatus, and jobStatus),
 const getCountOfJobs = async (req, res) => {
   try {
-    let count;
-    let customerId = req.params.customerId
-    if (req.params.customerId) {
-      // If ID is provided, count documents with that ID
-      count = await Job.countDocuments({ 
-    customerId: req.params.customerId,
-      jobStatus: { $ne: 'Closed' }  // $ne means "not equal to"
-      });
+    let query = {};
+    const { user_id, userStatus, status: jobStatus } = req.params;
+
+    // Handle jobStatus with "!" prefix
+    if (jobStatus.startsWith('!')) {
+      query.jobStatus = { $ne: jobStatus.slice(1) };
     } else {
-      // If no ID is provided, count all documents
-      count = await Job.countDocuments({
-        jobStatus: { $ne: 'Closed' }  // $ne means "not equal to"
-
-      });
-      
+      query.jobStatus = jobStatus;
     }
-    if (count) {
-    res.json({ totalJobs: count });
-    }else {
-      res.status(404).json({ message404: "no jobs found for this customer id",customerId });
-    }
-  } catch (error) {
-    printError(error, res);
-  }
-};
 
-/// Get the count of jobs for a worker where the status is not "closed"
-const getCountOfJobsWorker = async (req, res) => {
-  try {
-    const count = await Job.countDocuments({ 
-      workerId: req.params.workerId,
-      jobStatus: { $ne: 'Closed' }  // $ne means "not equal to"
-    });
+    // Handle userStatus conditions
+    if (userStatus === 'worker') {
+      query.workerId = user_id;
+    } else if (userStatus === 'customer') {
+      query.customerId = user_id;
+    } // For Manager, we don't need to filter by user_id
+
+    const count = await Job.countDocuments(query);
+
     if (count) {
       res.json({ totalJobs: count });
     } else {
-      res.status(404).json({ message404: "The worker has no jobs or all jobs are closed" });
+      res.status(404).json({ message404: "No jobs found for this configuration", user_id, userStatus, jobStatus });
     }
   } catch (error) {
     printError(error, res);
   }
 };
+
+
+
 
 //  get all jobs
 const getAllJobs = async (req, res) => {
@@ -153,20 +142,30 @@ const getOpenJobs = async (req, res) => {
   }
 };
 
+//I would like to extent this route: input parameter user_id, userStatus, jobStatus. Job status can also be inverted !  
+// Jobserch after following conditions: 
+// if userStatus == Worker: return jobs where user_id = workerId && jobStatus
+// if userStatus == Customer: return jobs where user_id = customerId && jobStatus
+// if userStatus == Manager: return all jobs matching jobStatus (like current)
 //  get all jobs with a certain status
 const getStatusJobs = async (req, res) => {
   try {
     let query = {};
-    const status = req.params.status;
+    const { user_id, userStatus, status: jobStatus } = req.params;
 
-    // Check if the status starts with "!"
-    if (status.startsWith('!')) {
-      // If it does, use the $ne (not equal) operator
-      query.jobStatus = { $ne: status.slice(1) }; // Remove the "!" and use the rest of the string
+    // Handle jobStatus with "!" prefix
+    if (jobStatus.startsWith('!')) {
+      query.jobStatus = { $ne: jobStatus.slice(1) };
     } else {
-      // If not, just match the status
-      query.jobStatus = status;
+      query.jobStatus = jobStatus;
     }
+
+    // Handle userStatus conditions
+    if (userStatus === 'worker') {
+      query.workerId = user_id;
+    } else if (userStatus === 'customer') {
+      query.customerId = user_id;
+    } // For Manager, we don't need to filter by user_id
 
     const jobs = await Job.find(query);
     if (jobs.length === 0) {
@@ -177,6 +176,7 @@ const getStatusJobs = async (req, res) => {
     printError(error, res);
   }
 };
+
 
 
 //  get all jobs for the logged-in customer
@@ -233,7 +233,6 @@ module.exports = {
   getStatusJobs,
   getOpenJobs,
   getCountOfJobs,
-  getCountOfJobsWorker,
   getJob,
   getMyJob,
   createJob,
