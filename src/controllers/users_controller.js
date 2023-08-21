@@ -11,7 +11,7 @@ const getLoggedInUser = async (request, res) => {
     // let user = await User.findById(request.user.user_id)
     let user = await User.findById(request.user.user_id);
     // console.log()
-    console.log( 'userid from logged in user ' + request.user.user_id);
+    console.log( 'userid from logged in user  ' + request.user.user_id);
     if (!user) {
       
       return res.status(404).json({ message404: 'User not found' });

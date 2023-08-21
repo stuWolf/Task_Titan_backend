@@ -1,7 +1,38 @@
 const Job = require('../models/job');
 const { printError } = require('../services/print_error');
 
+// get the count of all jobs
+// configuration (user_id, userStatus, and jobStatus),
+const getCountOfJobs = async (req, res) => {
+  try {
+    let query = {};
+    const { user_id, userStatus, status: jobStatus } = req.params;
 
+    // Handle jobStatus with "!" prefix
+    if (jobStatus.startsWith('!')) {
+      query.jobStatus = { $ne: jobStatus.slice(1) };
+    } else {
+      query.jobStatus = jobStatus;
+    }
+
+    // Handle userStatus conditions
+    if (userStatus === 'worker') {
+      query.workerId = user_id;
+    } else if (userStatus === 'customer') {
+      query.customerId = user_id;
+    } // For Manager, we don't need to filter by user_id
+
+    const count = await Job.countDocuments(query);
+
+    if (count) {
+      res.json({ totalJobs: count });
+    } else {
+      res.status(404).json({ message404: "No jobs found for this configuration", user_id, userStatus, jobStatus });
+    }
+  } catch (error) {
+    printError(error, res);
+  }
+};
 
 
 
@@ -190,41 +221,7 @@ const getMyJob = async (req, res) => {
     }
   };
 
-// get the count of all jobs
-// configuration (user_id, userStatus, and jobStatus),
-const getCountOfJobs = async (req, res) => {
 
-
-
-  try {
-    let query = {};
-    const { user_id, userStatus, status: jobStatus } = req.params;
-
-    // Handle jobStatus with "!" prefix
-    if (jobStatus.startsWith('!')) {
-      query.jobStatus = { $ne: jobStatus.slice(1) };
-    } else {
-      query.jobStatus = jobStatus;
-    }
-
-    // Handle userStatus conditions
-    if (userStatus === 'worker') {
-      query.workerId = user_id;
-    } else if (userStatus === 'customer') {
-      query.customerId = user_id;
-    } // For Manager, we don't need to filter by user_id
-
-    const count = await Job.countDocuments(query);
-// console.log('count jobs from jobs controller  ' + count)
-    if (count) {
-      res.json({ totalJobs: count });
-    } else {
-      res.status(404).json({ message404: "No jobs found for this configuration", user_id, userStatus, jobStatus });
-    }
-  } catch (error) {
-    printError(error, res);
-  }
-};
 
 
 

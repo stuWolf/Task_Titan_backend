@@ -45,7 +45,8 @@ switch(process.env.NODE_ENV.toLowerCase()){
 		databaseURL = process.env.DATABASE_URL;
 		break;
 	case "development":
-		databaseURL = 'mongodb://localhost:27017/task_titan_db';
+		// databaseURL = 'mongodb://localhost:27017/task_titan_db';
+		databaseURL = 'mongodb://localhost:27017,localhost:27018,localhost:27019/task_titan_db?replicaSet=myReplicaSet';
 		break;
 	case "test":
 		databaseURL = 'mongodb://localhost:27017/task_titan_db_test';
@@ -57,7 +58,7 @@ switch(process.env.NODE_ENV.toLowerCase()){
 // create a connection
 const {databaseConnector} = require("./database")
 databaseConnector(databaseURL).then(() =>{
-	console.log("connected to the db!");
+	console.log("connected to the db!"+ databaseURL);
 
 
     // // Set up the change stream for the 'jobs' collection
@@ -103,8 +104,12 @@ app.get("/", (request, response) => {
 	});
 });
 
+
 const loginRouter = require('./routes/login_routes')
 app.use("/login", loginRouter)
+
+const eventRouter = require('./routes/event_routes')
+app.use("/event", eventRouter)
 
 // when login Router is performed that doesn't need a token no validate request
 // add a middleware that validates user authentication for all notes routes
