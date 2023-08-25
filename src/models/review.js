@@ -26,7 +26,7 @@ const ReviewSchema = new mongoose.Schema({
     
   },
   stars: {
-    type: Number,
+    type: String,
     
   },
   review: {

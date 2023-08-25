@@ -75,6 +75,7 @@ const JobSchema = new mongoose.Schema({
     type: String,
     default: 'link to invoice.PDF'
   }
+ 
 });
 
 module.exports = mongoose.model('Job', JobSchema);

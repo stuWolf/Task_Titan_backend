@@ -64,8 +64,8 @@ const createReview = async (req, res) => {
     // Create a new review instance and set userID and endDate
     const review = new Review({
       ...req.body,
-      userId: req.user.user_id, // Set userID from request user data
-      endDate: new Date(), // Set endDate as today's date
+      userId: req.user.user_id // Set userID from request user data
+      // endDate: new Date(), // Set endDate as today's date
     });
     await review.save();
     res.status(201).json(review);
